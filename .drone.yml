@@ -1,0 +1,39 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: linter
+    image: snakepacker/python:all
+    commands:
+      - tox -e lint
+
+  - name: python 2.7
+    image: snakepacker/python:all
+    commands:
+      - tox -e py27
+
+  - name: python 3.4
+    image: snakepacker/python:all
+    commands:
+      - tox -e py34
+
+  - name: python 3.5
+    image: snakepacker/python:all
+    commands:
+      - tox -e py35
+
+  - name: python 3.6
+    image: snakepacker/python:all
+    commands:
+      - tox -e py36
+
+  - name: python 3.7
+    image: snakepacker/python:all
+    commands:
+      - tox -e py37
+
+  # TODO: Uncomment when Python 3.8 will be supported by `snakepacker`
+  # - name: python 3.8
+  #   image: snakepacker/python:all
+  #   commands:
+  #     - tox -e py38
