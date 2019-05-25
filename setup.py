@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='tls-property',
-    version='1.0',
+    version='1.0.1',
 
     py_modules=['tls_property'],
     provides=['tls_property'],
