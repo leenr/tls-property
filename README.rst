@@ -17,10 +17,10 @@ Garbage collecting is respected, `@tls_property` won't mess up with it.
 
     class SuperClientWrapper:
         @tls_property
-        def _client(self) -> SuperNonThreadsafeClient:
-            return SuperNonThreadsafeClient()
+        def _client(self) -> NonThreadsafeSuperClient:
+            return NonThreadsafeSuperClient()
 
-Module works on Python 2.7 and Python 3.4+.
+Module works on Python == 2.7 and Python ~= 3.4.
 
 Installation
 ------------
@@ -31,6 +31,4 @@ Installation
 
 License
 -------
-Module is released under Public Domain as described in
-`CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.0/>`_
-document.
+Public Domain: `CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.0/>`_.
