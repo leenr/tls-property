@@ -5,7 +5,7 @@ setup(
     name='tls-property',
     version='1.0',
 
-    packages=[''],
+    py_modules=['tls_property'],
     provides=['tls_property'],
 
     description='A @decorator for caching properties in classes '
