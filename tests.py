@@ -31,12 +31,12 @@ else:  # Python 2.7 and below
 def cls():
     # tuples doesn't support weak references "even when subclassed"
     #  (according to the documentation of weakref module)
-    class Result:
+    class Result(object):
         def __init__(self, thread_ident, i):
             self.thread_ident = thread_ident
             self.i = i
 
-    class Test:
+    class Test(object):
         def __init__(self):
             self.tls = threading.local()
 
@@ -103,10 +103,39 @@ def test_tls_property_gc(cls):
 
     del p, obj
     gc.collect()
-
     assert obj_ref() is None, 'Object is still alive?!'
     assert p_ref() is None, 'Value is still alive'
 
 
 def test_tls_property_get(cls):
     assert isinstance(cls.prop, tls_property)
+
+
+def test_tls_property_reset(cls):
+    obj = cls()
+
+    del obj.prop  # should not fail
+
+    value1 = obj.prop
+    value2 = obj.prop
+    assert value1 is value2, 'Something wrong with basics before reset?!'
+
+    del obj.prop
+
+    value3 = obj.prop
+    value4 = obj.prop
+    assert value3 is value4, 'Something wrong with basics after reset'
+
+    assert value1 is not value3, 'Reset not working'
+
+
+def test_tls_property_gc_reset(cls):
+    obj = cls()
+
+    p = obj.prop
+    assert p
+    p_ref = weakref.ref(p)
+
+    del p, obj.prop
+    gc.collect()
+    assert p_ref() is None, 'Value is still alive after reset'

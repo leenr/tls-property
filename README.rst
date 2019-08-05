@@ -17,8 +17,18 @@ Garbage collecting is respected, `@tls_property` won't mess up with it.
 
     class SuperClientWrapper:
         @tls_property
-        def _client(self) -> NonThreadsafeSuperClient:
+        def nonthreadsafe_client(self) -> NonThreadsafeSuperClient:
             return NonThreadsafeSuperClient()
+
+Also, value reset supported via @tls_property :code:`del` ete:
+
+.. code-block:: python
+
+    client = SuperClientWrapper()
+    client.something()
+    del client.nonthreadsafe_client
+    client.something()
+..
 
 Module works on Python == 2.7 and Python ~= 3.4.
 
@@ -27,7 +37,7 @@ Installation
 .. code-block:: bash
 
     pip install tls-property
-
+..
 
 License
 -------

@@ -28,5 +28,9 @@ class tls_property(object):
 
         return value
 
+    def __delete__(self, obj):
+        if hasattr(self.tls, 'container'):
+            self.tls.container.pop(obj, _SENTINEL)
+
 
 __all__ = ('tls_property',)
