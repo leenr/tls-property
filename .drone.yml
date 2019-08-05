@@ -32,8 +32,7 @@ steps:
     commands:
       - tox -e py37
 
-  # TODO: Uncomment when Python 3.8 will be supported by `snakepacker`
-  # - name: python 3.8
-  #   image: snakepacker/python:all
-  #   commands:
-  #     - tox -e py38
+  - name: python 3.8
+    image: snakepacker/python:all
+    commands:
+      - tox -e py38
